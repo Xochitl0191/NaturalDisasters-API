@@ -1,20 +1,51 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using CsvHelper;
 using Microsoft.AspNetCore.Mvc;
+
 
 namespace NaturalDisasters_API.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        // GET api/values
+        string path = @"C:\Users\XochLove\source\repos\NaturalDisasters-API\NaturalDisasters-API\Data\DisasterDeclarationsSummaries (4).csv";
+        public ValuesController()
+        {
+
+
+            //using (StreamReader reader = new StreamReader(path))
+            //{
+            //  myData = (JObject)JToken.ReadFrom(new JsonTextReader(reader));
+            //}
+        }
+
+            // GET api/values
         [HttpGet]
         public IEnumerable<string> Get()
         {
+
+            using (var sr = new StreamReader(path))
+            {
+
+                var reader = new CsvReader(sr);
+
+                //CSVReader will now read the whole file into an enumerable
+                var records = reader.GetRecords<DataRecord>().ToList();
+
+
+
+                // find by incedent type
+                var oc = records.Where(s => s.IncidentType == "Flood");
+
+            }
+
             return new string[] { "value1", "value2" };
         }
+
 
         // GET api/values/5
         [HttpGet("{id}")]
