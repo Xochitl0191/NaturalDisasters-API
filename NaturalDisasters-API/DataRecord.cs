@@ -8,11 +8,11 @@ namespace NaturalDisasters_API
     public class DataRecord
     {
 
-        public String DisasterNumber { get; set; }
-        public String State { get; set; }
-        public String IncidentType { get; set; }
+        public string disasterNumber { get; set; }
+        public string state { get; set; }
+        public string incidentType { get; set; }
 
-        public DateTime DeclarationDate { get; set; }
+        public DateTime declarationDate { get; set; }
 
 
 

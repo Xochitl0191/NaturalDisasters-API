@@ -12,7 +12,7 @@ namespace NaturalDisasters_API.Controllers
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        string path = @"C:\Users\XochLove\source\repos\NaturalDisasters-API\NaturalDisasters-API\Data\DisasterDeclarationsSummaries (4).csv";
+        string path = @"C:\Users\XochLove\source\repos\NaturalDisasters-API\NaturalDisasters-API\Data\DisasterDeclarationsSummaries.csv";
         public ValuesController()
         {
 
@@ -23,29 +23,26 @@ namespace NaturalDisasters_API.Controllers
             //}
         }
 
-            // GET api/values
+        // GET api/values
+        // http://localhost:63220/api/values?type=Flood
         [HttpGet]
-        public IEnumerable<string> Get()
+        public JsonResult Get(string type)
         {
+            List<DataRecord> pp = new List<DataRecord>();
 
             using (var sr = new StreamReader(path))
             {
-
                 var reader = new CsvReader(sr);
-
                 //CSVReader will now read the whole file into an enumerable
                 var records = reader.GetRecords<DataRecord>().ToList();
-
-
-
                 // find by incedent type
-                var oc = records.Where(s => s.IncidentType == "Flood");
+                var oc = records.Where(s => s.incidentType == type);
+                pp = oc.ToList();
 
             }
 
-            return new string[] { "value1", "value2" };
+            return Json(pp);
         }
-
 
         // GET api/values/5
         [HttpGet("{id}")]
