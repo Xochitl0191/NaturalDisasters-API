@@ -33,7 +33,7 @@ namespace NaturalDisasters_API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+           
             app.UseMvc();
         }
     }

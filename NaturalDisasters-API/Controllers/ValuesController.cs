@@ -68,5 +68,6 @@ namespace NaturalDisasters_API.Controllers
         public void Delete(int id)
         {
         }
+        
     }
 }
